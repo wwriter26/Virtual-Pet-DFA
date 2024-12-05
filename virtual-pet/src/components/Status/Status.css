@@ -1,0 +1,35 @@
+.status {
+  margin: 1rem 0;
+  font-family: Arial, sans-serif;
+}
+
+.status__label {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.status__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.status__value {
+  height: 100%;
+  background-color: #4caf50; /* Green for default */
+  border-radius: 10px 0 0 10px;
+  transition: width 0.3s ease-in-out;
+}
+
+.status__value-text {
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  text-align: center;
+}

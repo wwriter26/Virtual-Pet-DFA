@@ -1,0 +1,33 @@
+.action-buttons {
+  display: flex; /* Align buttons in a row */
+  justify-content: center; /* Center buttons horizontally */
+  gap: 1rem; /* Add space between buttons */
+  margin: 1rem 0; /* Add spacing above and below the buttons */
+}
+
+.action-buttons button {
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  font-size: 1rem; /* Text size */
+  padding: 0.5rem 1rem; /* Padding for a balanced look */
+  border: none; /* Remove default button border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+.action-buttons button:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.action-buttons button:active {
+  background-color: #3e8e41; /* Even darker green when clicked */
+  transform: translateY(0); /* Return to original position */
+}
+
+.action-buttons button:focus {
+  outline: 2px solid #3e8e41; /* Highlight focus with green border */
+  outline-offset: 2px; /* Add space between the outline and button */
+}

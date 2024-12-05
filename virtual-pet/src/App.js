@@ -2,8 +2,8 @@ import './App.css';
 import React, { useState } from 'react';
 import Pet from './components/Pet/Pet';
 import PetDisplay from './components/PetDisplay/PetDisplay';
-import StatusIndicators from './components/Status/Status';
 import ActionButtons from './components/ActionButtons/ActionButtons';
+import Navbar from './components/Navbar/Navbar';
 
 
 function App() {
@@ -16,9 +16,9 @@ function App() {
 
   return (
     <div>
-      <PetDisplay state={pet.currentState} />
-      <StatusIndicators hunger={pet.hunger} happiness={pet.happiness} />
-      <ActionButtons onAction={handleAction} />
+      <Navbar />
+      <PetDisplay state={pet.currentState} pet={pet}/>
+      <ActionButtons onAction={handleAction} pet={pet}/>
     </div>
   );
 }
