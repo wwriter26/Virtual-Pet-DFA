@@ -11,7 +11,8 @@ function App() {
 
   const handleAction = (action) => {
     pet[action]();
-    setPet({ ...pet });
+    // setPet(new Pet()); 
+    setPet(Object.assign(Object.create(Object.getPrototypeOf(pet)), pet)); 
   };
 
   return (

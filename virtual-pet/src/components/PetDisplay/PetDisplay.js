@@ -18,7 +18,7 @@ const PetDisplay = ({ pet }) => {
       <Status label="Hunger" value={pet.hunger} max={100} />
       <Status label="Happiness" value={pet.happiness} max={100} />
       <img
-        src={getImageForState(pet.currentState)}
+        src={getImageForState(pet.getCurrentState())}
         alt={pet.currentState}
         style={{ width: "100%" }}
       />

@@ -31,3 +31,9 @@
   outline: 2px solid #3e8e41; /* Highlight focus with green border */
   outline-offset: 2px; /* Add space between the outline and button */
 }
+
+button:disabled {
+  background-color: #d3d3d3; /* light gray */
+  color: #7a7a7a; /* dark gray for text */
+  opacity: 0.6; /* Make it semi-transparent */
+}

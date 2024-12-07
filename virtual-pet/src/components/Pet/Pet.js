@@ -7,6 +7,10 @@ class Pet extends DFA {
     this.happiness = 100;
   }
 
+  hatch() {
+    this.transition('hatch');
+  }
+
   feed() {
     this.hunger = Math.max(0, this.hunger - 10);
     this.transition('feed');
@@ -20,6 +24,10 @@ class Pet extends DFA {
   train() {
     this.happiness = Math.max(0, this.happiness - 5);
     this.transition('train');
+  }
+
+  getCurrentState() {
+    return this.currentState;
   }
 
   getPetStatus() {
