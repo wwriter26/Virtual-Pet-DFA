@@ -18,7 +18,10 @@ const ActionButtons = ({ onAction, pet }) => {
         disabled={!valid.train}>Train</button>
 
       <button onClick={() => onAction('hatch')}
-      disabled={!valid.hatch}>Hatch</button>
+        disabled={!valid.hatch}>Hatch</button>
+
+      <button onClick={() => onAction('evolve')}
+        disabled={!valid.evolve}>Evolve</button>
     </div>
   );
 }

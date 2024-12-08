@@ -4,9 +4,9 @@ class DFA {
     this.currentState = 'Egg';
     this.transitions = {
       'Egg': { hatch: 'Baby' },
-      'Baby': { feed: 'Teen', play: 'Baby' },
-      'Teen': { train: 'Adult', ignore: 'Baby' },
-      'Adult': { evolve: 'Evolved' },
+      'Baby': { feed: 'Baby', play: 'Baby', evolve: 'Teen' },
+      'Teen': { train: 'Teen', feed: 'Teen', evolve: 'Adult' },
+      'Adult': { evolve: 'Evolved', feed: 'Adult', train: 'Adult' },
       'Evolved': {},
     };
   }
