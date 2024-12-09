@@ -1,5 +1,4 @@
 import React from "react";
-import Status from "../Status/Status";
 
 const PetDisplay = ({ pet }) => {
   const getImageForState = (state) => {
@@ -13,15 +12,16 @@ const PetDisplay = ({ pet }) => {
   };
 
   return (
-    <div style={{ width: "300px", margin: "0 auto" }}>
+    <div style={{ width: "300px", margin: "0 auto", textAlign: "center" }}>
       <h1>Pet Status</h1>
-      <Status label="Hunger" value={pet.hunger} max={100} />
-      <Status label="Happiness" value={pet.happiness} max={100} />
       <img
         src={getImageForState(pet.getCurrentState())}
-        alt={pet.currentState}
+        alt={pet.getCurrentState()}
         style={{ width: "100%" }}
       />
+      {pet.getCurrentState() === "Dead" && (
+        <h2 style={{ color: "red" }}>Your pet is dead 😢</h2>
+      )}
     </div>
   );
 };

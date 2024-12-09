@@ -1,13 +1,14 @@
 class DFA {
   constructor() {
-    this.states = ['Egg', 'Baby', 'Teen', 'Adult', 'Evolved'];
+    this.states = ['Egg', 'Baby', 'Teen', 'Adult', 'Evolved', 'Dead'];
     this.currentState = 'Egg';
     this.transitions = {
       'Egg': { hatch: 'Baby' },
-      'Baby': { feed: 'Baby', play: 'Baby', evolve: 'Teen' },
-      'Teen': { train: 'Teen', feed: 'Teen', evolve: 'Adult' },
-      'Adult': { evolve: 'Evolved', feed: 'Adult', train: 'Adult' },
+      'Baby': { play: 'Baby', feed: 'Teen', ignore: 'Dead' },
+      'Teen': { play: 'Teen', train: 'Adult', ignore: 'Baby' },
+      'Adult': { play: 'Adult', evolve: 'Evolved', ignore: 'Teen' },
       'Evolved': {},
+      'Dead': {}, // No transitions from the Dead state
     };
   }
 
