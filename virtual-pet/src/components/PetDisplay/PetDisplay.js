@@ -1,13 +1,12 @@
 import React from "react";
 
-const PetDisplay = ({ pet }) => {
+const PetDisplay = ({ pet, timeLeft }) => {
   const getImageForState = (state) => {
     try {
-      // Dynamically import the image based on the state
       return require(`../../assets/images/${state}.png`);
     } catch (error) {
       console.error("Image not found for state:", state);
-      return ""; // Fallback image or empty string
+      return "";
     }
   };
 
@@ -19,6 +18,10 @@ const PetDisplay = ({ pet }) => {
         alt={pet.getCurrentState()}
         style={{ width: "100%" }}
       />
+      <h2>State: {pet.getCurrentState()}</h2>
+      <h3>Hunger: {pet.getPetStatus().hunger}</h3>
+      <h3>Happiness: {pet.getPetStatus().happiness}</h3>
+      <h3>Time until ignore: {timeLeft}s</h3>
       {pet.getCurrentState() === "Dead" && (
         <h2 style={{ color: "red" }}>Your pet is dead 😢</h2>
       )}

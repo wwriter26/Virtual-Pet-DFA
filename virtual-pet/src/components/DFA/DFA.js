@@ -5,29 +5,18 @@ class DFA {
 
     this.transitions = {
       'Egg': { hatch: 'Baby' },
-      'Baby': { play: 'Baby', feed: 'Teen' },
-      'Teen': { play: 'Teen', train: 'Adult' },
-      'Adult': { play: 'Adult', evolve: 'Evolved' },
+      'Baby': { play: 'Baby', feed: 'Teen', ignore: 'Dead' },
+      'Teen': { play: 'Teen', train: 'Adult', ignore: 'Baby' },
+      'Adult': { play: 'Adult', evolve: 'Evolved', ignore: 'Teen' },
       'Evolved': {},
-      'Dead': {}, // No transitions from the Dead state
-    };
-
-    // Define fallback sequences for the ignore action
-    this.ignoreSequence = {
-      'Adult': 'Teen',
-      'Teen': 'Baby',
-      'Baby': 'Dead',
+      'Dead': {},
     };
   }
 
   transition(action) {
-    if (action === 'ignore' && this.ignoreSequence[this.currentState]) {
-      this.currentState = this.ignoreSequence[this.currentState];
-    } else {
-      const nextState = this.transitions[this.currentState]?.[action];
-      if (nextState) {
-        this.currentState = nextState;
-      }
+    const nextState = this.transitions[this.currentState]?.[action];
+    if (nextState) {
+      this.currentState = nextState;
     }
   }
 

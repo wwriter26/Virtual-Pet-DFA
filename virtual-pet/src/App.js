@@ -7,23 +7,41 @@ import Navbar from './components/Navbar/Navbar';
 
 function App() {
   const [pet, setPet] = useState(new Pet());
+  const [timeLeft, setTimeLeft] = useState(5); 
 
   const handleAction = (action) => {
-    const clonedPet = pet.clone(); // Clone the pet first
-    clonedPet[action](); // Perform the action on the cloned pet
-    setPet(clonedPet); // Update state with the new pet instance
+    const clonedPet = pet.clone();
+    clonedPet[action]();
+    setPet(clonedPet);
+    resetTimer();
   };
-  
-  // Handle inactivity-triggered updates by directly resetting pet state
+
+  //function to reset the timer
+  const resetTimer = () => {
+    setTimeLeft(5);
+  };
+
+  //countdown effect
   useEffect(() => {
-    const timer = pet.inactivityTimer;
-    return () => clearTimeout(timer); // Clean up the timer when the component unmounts
+    const timerInterval = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 1) {
+          pet.ignore(); //trigger the ignore action when the timer reaches 0
+          setPet(pet.clone()); //update the pet state
+          resetTimer(); //reset 
+          return 5; //restart the timer after ignore action
+        }
+        return prevTime - 1;
+      });
+    }, 1000); //update every second
+
+    return () => clearInterval(timerInterval); //cleanup interval on unmount
   }, [pet]);
 
   return (
     <div>
       <Navbar />
-      <PetDisplay pet={pet} />
+      <PetDisplay pet={pet} timeLeft={timeLeft} />
       <ActionButtons onAction={handleAction} pet={pet} />
     </div>
   );
