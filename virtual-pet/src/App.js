@@ -9,8 +9,9 @@ function App() {
   const [pet, setPet] = useState(new Pet());
 
   const handleAction = (action) => {
-    pet[action]();         // Perform the action on the pet instance
-    setPet(pet.clone());   // Clone the pet to trigger a re-render
+    const clonedPet = pet.clone(); // Clone the pet first
+    clonedPet[action](); // Perform the action on the cloned pet
+    setPet(clonedPet); // Update state with the new pet instance
   };
   
   // Handle inactivity-triggered updates by directly resetting pet state

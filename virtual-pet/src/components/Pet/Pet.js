@@ -14,8 +14,7 @@ class Pet extends DFA {
       dead: new Audio(require('../../assets/images/sounds/dead.mp3')),
     };
 
-    this.resetInactivityTimer();     //start inactivity timer
-
+    this.resetInactivityTimer(); // Start inactivity timer
   }
 
   playSound(action) {
@@ -24,25 +23,29 @@ class Pet extends DFA {
     }
   }
 
-  resetInactivityTimer() { //reset function?
+  resetInactivityTimer() {
     if (this.inactivityTimer) {
       clearTimeout(this.inactivityTimer);
     }
+
     if (this.getCurrentState() !== 'Dead') {
       this.inactivityTimer = setTimeout(() => {
         this.ignore();
-      }, 10000); // 10 seconds
+      }, 20000); // 20 seconds inactivity timer
     }
   }
 
   ignore() {
-    this.transition('ignore'); //call ignore transition (see DFA for path)
-    this.playSound('dead');
-
-    if (this.currentState === 'Dead') {
-      clearTimeout(this.inactivityTimer); //stop the timer when pet is Dead
-    } else {
-      this.resetInactivityTimer(); //reset the timer for the new state
+    const previousState = this.getCurrentState();
+    this.transition('ignore');
+    
+    // Only play "dead" sound when transitioning to Dead state
+    if (this.getCurrentState() === 'Dead' && previousState !== 'Dead') {
+      this.playSound('dead');
+    }
+    
+    if (this.getCurrentState() !== 'Dead') {
+      this.resetInactivityTimer();
     }
   }
 
