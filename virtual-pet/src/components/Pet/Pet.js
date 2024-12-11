@@ -7,12 +7,13 @@ class Pet extends DFA {
     this.happiness = 50;    // Init happiness (0 to 100)
 
     this.sounds = {
-      feed: new Audio(require('../../assets/images/sounds/feed.mp3')),
-      play: new Audio(require('../../assets/images/sounds/play.mp3')),
-      evolve: new Audio(require('../../assets/images/sounds/evolution.mp3')),
-      train: new Audio(require('../../assets/images/sounds/train.mp3')),
-      hatch: new Audio(require('../../assets/images/sounds/hatch.mp3')),
-      dead: new Audio(require('../../assets/images/sounds/dead.mp3')),
+
+      feed: new Audio(require('../../assets/sounds/feed.mp3')),
+      play: new Audio(require('../../assets/sounds/play.mp3')),
+      evolve: new Audio(require('../../assets/sounds/evolution.mp3')),
+      train: new Audio(require('../../assets/sounds/train.mp3')),
+      hatch: new Audio(require('../../assets/sounds/hatch.mp3')),
+      dead: new Audio(require('../../assets/sounds/dead.mp3')),
     };
 
     this.resetInactivityTimer(); // Start inactivity timer
