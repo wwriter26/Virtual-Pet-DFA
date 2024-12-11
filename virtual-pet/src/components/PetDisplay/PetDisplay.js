@@ -19,7 +19,7 @@ const PetDisplay = ({ pet, timeLeft }) => {
         style={{ width: "100%" }}
       />
       <h2>State: {pet.getCurrentState()}</h2>
-      <h3>Hunger: {pet.getPetStatus().hunger}</h3>
+      <h3>Fullness: {pet.getPetStatus().hunger}</h3>
       <h3>Happiness: {pet.getPetStatus().happiness}</h3>
       <h3>Time until ignore: {timeLeft}s</h3>
       {pet.getCurrentState() === "Dead" && (

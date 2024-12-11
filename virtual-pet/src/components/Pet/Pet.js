@@ -42,7 +42,7 @@ class Pet extends DFA {
   
 
   ignore() {
-    this.hunger = Math.min(100, this.hunger + 20); // Increase hunger when ignored
+    this.hunger = Math.min(100, this.hunger - 20); // Increase hunger when ignored
     this.happiness = Math.max(0, this.happiness - 20); // Decrease happiness when ignored
 
     // Transition to the next state based on the `ignore` action
@@ -71,7 +71,7 @@ class Pet extends DFA {
 
   feed() {
     if (['Baby', 'Teen', 'Adult'].includes(this.currentState)) {
-      this.hunger = Math.max(0, this.hunger - 25);
+      this.hunger = Math.max(0, this.hunger + 25);
       this.happiness = Math.min(100, this.happiness + 10);
       this.transition('feed');
       this.playSound('feed');
@@ -100,12 +100,12 @@ class Pet extends DFA {
   }
 
   evolve() {
-    if (this.currentState === 'Adult' && this.hunger <= 30 && this.happiness >= 90) {
+    if (this.currentState === 'Adult' && this.hunger >= 30 && this.happiness >= 90) {
       this.transition('evolve');
       this.hunger = 0;
       this.happiness = 100;
       this.playSound('evolve');
-      this.resetInactivityTimer();
+      clearTimeout(this.inactivityTimer);
     }
   }
 
