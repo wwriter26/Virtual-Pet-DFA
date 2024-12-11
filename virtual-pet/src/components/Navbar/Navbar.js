@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import "../../index.css";
 import feather from "feather-icons";
+import nfa from "../../assets/images/NFA.png";
 import { Modal, Box, Button } from "@mui/material";
 
 
@@ -34,6 +35,14 @@ const Navbar = () => {
     setOpenRole(true);
   }
   const handleCloseRole = () => setOpenRole(false);
+
+    // our NFA
+    const [openNFA, setOpenNFA] = useState(false);
+    const handleOpenNFA = (event) => {
+      event.preventDefault();
+      setOpenNFA(true);
+    }
+    const handleCloseNFA = () => setOpenNFA(false);
 
   // // settings modal
   // const [openSettings, setOpenSettings] = useState(false);
@@ -172,6 +181,44 @@ const Navbar = () => {
               sx={{ ml: 2 }}
             >
               Yes, Reset
+            </Button>
+          </Box>
+        </Modal>
+
+        <li className="navbar__item">
+          <a 
+            href="/home" 
+            className="navbar__link"
+            onClick={handleOpenNFA}
+          >
+            <i data-feather="git-branch"></i>
+            <span>NFA</span>
+          </a>
+        </li>
+        <Modal
+          open={openNFA}
+          onClose={handleCloseNFA}
+          aria-labelledby="modal-title"
+          aria-describedby="modal-description"
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 1000,
+              bgcolor: "background.paper",
+              boxShadow: 24,
+              p: 4,
+              borderRadius: 2,
+            }}
+          >
+            <h2 id="modal-title">NFA Visual</h2>
+            <img className="navbar__nfa" src={nfa} alt="NFA" />
+            <br/>
+            <Button onClick={handleCloseNFA} variant="contained" color="primary">
+              Back
             </Button>
           </Box>
         </Modal>

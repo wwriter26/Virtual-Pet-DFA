@@ -112,3 +112,7 @@
   transform: translateX(40px);
 }
 
+.navbar__nfa {
+  width: 900px;
+  height:450px;
+}
