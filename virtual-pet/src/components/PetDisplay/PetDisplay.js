@@ -1,27 +1,30 @@
 import React from "react";
-import Status from "../Status/Status";
 
-const PetDisplay = ({ pet }) => {
+const PetDisplay = ({ pet, timeLeft }) => {
   const getImageForState = (state) => {
     try {
-      // Dynamically import the image based on the state
       return require(`../../assets/images/${state}.png`);
     } catch (error) {
       console.error("Image not found for state:", state);
-      return ""; // Fallback image or empty string
+      return "";
     }
   };
 
   return (
-    <div style={{ width: "300px", margin: "0 auto" }}>
+    <div style={{ width: "300px", margin: "0 auto", textAlign: "center" }}>
       <h1>Pet Status</h1>
-      <Status label="Hunger" value={pet.hunger} max={100} />
-      <Status label="Happiness" value={pet.happiness} max={100} />
       <img
         src={getImageForState(pet.getCurrentState())}
-        alt={pet.currentState}
+        alt={pet.getCurrentState()}
         style={{ width: "100%" }}
       />
+      <h2>State: {pet.getCurrentState()}</h2>
+      <h3>Hunger: {pet.getPetStatus().hunger}</h3>
+      <h3>Happiness: {pet.getPetStatus().happiness}</h3>
+      <h3>Time until ignore: {timeLeft}s</h3>
+      {pet.getCurrentState() === "Dead" && (
+        <h2 style={{ color: "red" }}>Your pet is dead 😢</h2>
+      )}
     </div>
   );
 };

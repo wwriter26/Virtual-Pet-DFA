@@ -1,21 +1,28 @@
 class DFA {
   constructor() {
-    this.states = ['Egg', 'Baby', 'Teen', 'Adult', 'Evolved'];
+    this.states = ['Egg', 'Baby', 'Teen', 'Adult', 'Evolved', 'Dead'];
     this.currentState = 'Egg';
+    this.prevState = 'Baby';
+
     this.transitions = {
       'Egg': { hatch: 'Baby' },
-      'Baby': { feed: 'Baby', play: 'Baby', evolve: 'Teen' },
-      'Teen': { train: 'Teen', feed: 'Teen', evolve: 'Adult' },
-      'Adult': { evolve: 'Evolved', feed: 'Adult', train: 'Adult' },
+      'Baby': { play: 'Baby', feed: 'Teen', ignore: 'Dead' },
+      'Teen': { play: 'Teen', train: 'Adult', ignore: 'Baby' },
+      'Adult': { play: 'Adult', evolve: 'Evolved', ignore: 'Teen' },
       'Evolved': {},
+      'Dead': {},
     };
   }
 
   transition(action) {
-    const nextState = this.transitions[this.currentState][action];
+    const nextState = this.transitions[this.currentState]?.[action];
     if (nextState) {
       this.currentState = nextState;
     }
+  }
+
+  getPrevState() {
+    return this.prevState;
   }
 
   getCurrentState() {
