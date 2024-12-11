@@ -2,6 +2,7 @@ class DFA {
   constructor() {
     this.states = ['Egg', 'Baby', 'Teen', 'Adult', 'Evolved', 'Dead'];
     this.currentState = 'Egg';
+    this.prevState = 'Baby';
 
     this.transitions = {
       'Egg': { hatch: 'Baby' },
@@ -18,6 +19,10 @@ class DFA {
     if (nextState) {
       this.currentState = nextState;
     }
+  }
+
+  getPrevState() {
+    return this.prevState;
   }
 
   getCurrentState() {

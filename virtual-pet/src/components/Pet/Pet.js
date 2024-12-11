@@ -3,8 +3,8 @@ import DFA from '../DFA/DFA';
 class Pet extends DFA {
   constructor() {
     super();
-    this.hunger = 0;        //init hunger (0 to 100, where 100 is full)
-    this.happiness = 50;    // init happiness (0 to 100)
+    this.hunger = 0;        // Init hunger (0 to 100, where 100 is full)
+    this.happiness = 50;    // Init happiness (0 to 100)
 
     this.sounds = {
       feed: new Audio(require('../../assets/images/sounds/feed.mp3')),
@@ -15,7 +15,7 @@ class Pet extends DFA {
       dead: new Audio(require('../../assets/images/sounds/dead.mp3')),
     };
 
-    this.resetInactivityTimer(); //start inactivity timer
+    this.resetInactivityTimer(); // Start inactivity timer
   }
 
   playSound(action) {
@@ -27,22 +27,35 @@ class Pet extends DFA {
   resetInactivityTimer() {
     if (this.inactivityTimer) {
       clearTimeout(this.inactivityTimer);
+      this.inactivityTimer = null;
     }
-
+  
     if (this.getCurrentState() !== 'Dead') {
       this.inactivityTimer = setTimeout(() => {
-        this.ignore();
-      }, 5000); //5 seconds inactivity timer
+        if (this.getCurrentState() !== 'Dead') {
+          this.ignore(); // Trigger ignore only once
+        }
+      }, 5000); // 5 seconds inactivity timer
     }
   }
+  
 
   ignore() {
-    this.hunger = Math.min(100, this.hunger + 20); //increase hunger when ignored
-    this.happiness = Math.max(0, this.happiness - 20); //decrease happiness when ignored
+    this.hunger = Math.min(100, this.hunger + 20); // Increase hunger when ignored
+    this.happiness = Math.max(0, this.happiness - 20); // Decrease happiness when ignored
 
+    // Transition to the next state based on the `ignore` action
+    const prevState = this.getCurrentState();
     this.transition('ignore');
 
-    if (this.getCurrentState() !== 'Dead') {
+    if (this.getCurrentState() === 'Dead') {
+      this.playSound('dead');
+    } else if (prevState === 'Evolved') {
+      // Special case for Evolved: transition back to Adult
+      this.currentState = 'Adult';
+      this.resetInactivityTimer();
+    } else {
+      // Reset timer for all other states
       this.resetInactivityTimer();
     }
   }
@@ -56,7 +69,7 @@ class Pet extends DFA {
   }
 
   feed() {
-    if (this.currentState === 'Baby' || this.currentState === 'Teen' || this.currentState === 'Adult') {
+    if (['Baby', 'Teen', 'Adult'].includes(this.currentState)) {
       this.hunger = Math.max(0, this.hunger - 25);
       this.happiness = Math.min(100, this.happiness + 10);
       this.transition('feed');
@@ -97,7 +110,7 @@ class Pet extends DFA {
 
   clone() {
     const newPet = new Pet();
-    newPet.currentState = this.currentState;
+    newPet.currentState = this.currentState; // Clone the current state
     newPet.hunger = this.hunger;
     newPet.happiness = this.happiness;
     return newPet;
