@@ -36,7 +36,7 @@ class Pet extends DFA {
         if (this.getCurrentState() !== 'Dead') {
           this.ignore(); // Trigger ignore only once
         }
-      }, 5000); // 5 seconds inactivity timer
+      }, 15000); // 5 seconds inactivity timer
     }
   }
   
@@ -50,7 +50,6 @@ class Pet extends DFA {
     this.transition('ignore');
 
     if (this.getCurrentState() === 'Dead') {
-      this.playSound('dead');
     } else if (prevState === 'Evolved') {
       // Special case for Evolved: transition back to Adult
       this.currentState = 'Adult';

@@ -18,7 +18,7 @@ function App() {
 
   //function to reset the timer
   const resetTimer = () => {
-    setTimeLeft(5);
+    setTimeLeft(15);
   };
 
   //countdown effect
@@ -32,9 +32,9 @@ function App() {
           const clonedPet = pet.clone();
           clonedPet.ignore(); // Trigger ignore action
           setPet(clonedPet); // Update the pet state
-          return 5; // Reset the timer to 5
+          return 15; // Reset the timer to 5
         } else if (prevTime === 1) {
-          return 5; // Ensure the timer resets cleanly after ignore action
+          return 15; // Ensure the timer resets cleanly after ignore action
         }
         return prevTime - 1; // Decrement timer normally
       });
@@ -45,7 +45,7 @@ function App() {
   
   // Reset `timeLeft` and `count` explicitly when the pet state changes
   useEffect(() => {
-    setTimeLeft(5); // Reset the timer
+    setTimeLeft(15); // Reset the timer
   }, [pet]);
   
   
